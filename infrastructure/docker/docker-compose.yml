@@ -1,23 +1,22 @@
 services:
 
-  postgres:
-    image: postgres:16-alpine
-    container_name: swiftpay-postgres
-    environment:
-      POSTGRES_USER: swiftpay
-      POSTGRES_PASSWORD: swiftpay123
-      POSTGRES_DB: swiftpay_gateway
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - swiftpay-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U swiftpay -d swiftpay_gateway"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+#  postgres:
+#    image: postgres:16-alpine
+#    container_name: swiftpay-postgres
+#    environment:
+#      POSTGRES_USER: swiftpay
+#      POSTGRES_PASSWORD: swiftpay123
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    networks:
+#      - swiftpay-network
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U swiftpay -d swiftpay_gateway"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
