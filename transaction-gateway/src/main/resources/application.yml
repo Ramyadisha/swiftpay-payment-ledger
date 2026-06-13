@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: 8085
 
 spring:
   application:
     name: transaction-gateway
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/swiftpay_gateway}
-    username: ${DB_USER:swiftpay}
-    password: ${DB_PASSWORD:swiftpay123}
+    url: jdbc:postgresql://localhost:5432/swiftpay_gateway
+    username: swiftpay
+    password: swiftpay123
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5

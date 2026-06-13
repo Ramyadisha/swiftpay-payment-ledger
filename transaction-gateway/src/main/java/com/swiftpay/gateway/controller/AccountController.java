@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
@@ -34,5 +35,10 @@ public class AccountController {
     public ResponseEntity<ApiResponse<?>> listAccounts() {
         return ResponseEntity.ok(ApiResponse.success(
                 accountRepository.findAll().stream().map(accountMapper::toDto).toList()));
+    }
+
+    @GetMapping("/hash")
+    public String getHash() {
+        return new BCryptPasswordEncoder(12).encode("Test@1234");
     }
 }

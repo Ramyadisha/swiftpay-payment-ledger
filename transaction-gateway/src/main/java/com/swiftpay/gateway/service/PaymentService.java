@@ -42,6 +42,10 @@ public class PaymentService {
         var cached = idempotencyService.getIfPresent(idempotencyKey);
         if (cached.isPresent()) return cached.get();
 
+        // ✅ DB fallback when Redis times out
+        var existing = transactionRepository.findByIdempotencyKey(idempotencyKey);
+        if (existing.isPresent()) return transactionMapper.toPaymentResponse(existing.get());
+
         if (request.getSenderId().equals(request.getReceiverId()))
             throw new IllegalArgumentException("Sender and receiver must be different accounts");
 

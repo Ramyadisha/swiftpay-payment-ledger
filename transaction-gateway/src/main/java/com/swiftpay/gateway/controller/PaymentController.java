@@ -36,13 +36,15 @@ public class PaymentController {
     }
 
     @GetMapping("/{transactionId}")
-    public ResponseEntity<ApiResponse<PaymentResponse>> getTransaction(@PathVariable UUID transactionId) {
+    public ResponseEntity<ApiResponse<PaymentResponse>> getTransaction(
+            @PathVariable("transactionId") UUID transactionId) {
         return ResponseEntity.ok(ApiResponse.success(paymentService.getTransaction(transactionId)));
     }
 
     @GetMapping("/users/{userId}/history")
     public ResponseEntity<ApiResponse<Page<PaymentResponse>>> getHistory(
-            @PathVariable UUID userId, @PageableDefault(size = 20) Pageable pageable) {
+            @PathVariable("userId") UUID userId,
+            @PageableDefault(size = 20) Pageable pageable) {
         return ResponseEntity.ok(ApiResponse.success(paymentService.getTransactionHistory(userId, pageable)));
     }
 }
